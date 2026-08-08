@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#07110f" />
-  <meta name="description" content="Download Veralume for Android — your calmer, clearer everyday companion." />
+  <meta name="theme-color" content="#100d08" />
+  <meta name="description" content="Download Veralume for Android — Scripture, reflection, and daily light wherever you go." />
   <title>Veralume — Download for Android</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -19,9 +19,9 @@
             display: ['Manrope', 'sans-serif']
           },
           colors: {
-            ink: '#07110f',
-            lime: '#caff65',
-            mint: '#75f4c5'
+            ink: '#100d08',
+            lime: '#f4d58d',
+            mint: '#dba968'
           }
         }
       }
@@ -31,7 +31,7 @@
     :root { color-scheme: dark; }
     * { box-sizing: border-box; }
     body {
-      background: #07110f;
+      background: #100d08;
       overflow-x: hidden;
     }
     .noise {
@@ -61,8 +61,8 @@
     }
     .shine:hover::after { left: 120%; }
     .phone-screen {
-      background: radial-gradient(circle at 75% 15%, rgba(202,255,101,.23), transparent 30%),
-                  linear-gradient(150deg, #152923 0%, #091310 65%);
+      background: radial-gradient(circle at 75% 15%, rgba(244,213,141,.22), transparent 30%),
+                  linear-gradient(150deg, #2b2115 0%, #120e09 65%);
     }
     @keyframes float { 0%,100% { transform: translate3d(0,0,0); } 50% { transform: translate3d(0,-18px,0); } }
     @keyframes rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
@@ -81,7 +81,7 @@
 </head>
 <body class="min-h-screen font-sans text-white selection:bg-lime selection:text-ink">
   <div class="pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden="true">
-    <div class="orb absolute -left-32 top-20 h-80 w-80 rounded-full bg-emerald-400/20 blur-3xl"></div>
+    <div class="orb absolute -left-32 top-20 h-80 w-80 rounded-full bg-amber-400/15 blur-3xl"></div>
     <div class="orb absolute right-[-8rem] top-[-4rem] h-[28rem] w-[28rem] rounded-full bg-lime/20 blur-3xl"></div>
     <div class="orb absolute bottom-[-10rem] left-1/2 h-96 w-96 rounded-full bg-cyan-400/10 blur-3xl"></div>
     <div class="noise absolute inset-0 opacity-[.045]"></div>
@@ -89,8 +89,8 @@
 
   <header class="relative z-20 mx-auto flex max-w-7xl items-center justify-between px-5 py-5 sm:px-6 sm:py-6 lg:px-10">
     <a href="#" class="flex items-center gap-3" aria-label="Veralume home">
-      <span class="grid h-10 w-10 place-items-center rounded-2xl bg-lime text-ink shadow-[0_0_30px_rgba(202,255,101,.22)]">
-        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.3" aria-hidden="true"><path d="M5 4l7 16 7-16-7 5-7-5Z" stroke-linejoin="round"/></svg>
+      <span class="grid h-10 w-10 place-items-center rounded-2xl bg-lime text-ink shadow-[0_0_30px_rgba(244,213,141,.22)]">
+        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 3.5h9.5A2.5 2.5 0 0 1 18 6v14.5H7.5A2.5 2.5 0 0 1 5 18V5a1.5 1.5 0 0 1 1-1.5Z"/><path d="M8 3.5V20.5M11 8h4M13 6v4" stroke-linecap="round"/></svg>
       </span>
       <span class="font-display text-lg font-bold tracking-tight">veralume</span>
     </a>
@@ -101,30 +101,34 @@
     <section class="mx-auto grid min-h-[calc(100svh-80px)] max-w-7xl items-center gap-14 px-5 pb-16 pt-8 sm:px-6 sm:pb-20 lg:min-h-[calc(100vh-96px)] lg:grid-cols-[1.05fr_.95fr] lg:px-10 lg:py-12">
       <div class="max-w-2xl">
         <div class="reveal mb-6 inline-flex items-center gap-2 rounded-full border border-lime/20 bg-lime/[.07] px-3.5 py-2 text-xs text-lime sm:mb-7 sm:px-4 sm:text-sm">
-          <span class="h-2 w-2 rounded-full bg-lime shadow-[0_0_12px_#caff65]"></span>
-          Now available on Android
+          <span class="h-2 w-2 rounded-full bg-lime shadow-[0_0_12px_#f4d58d]"></span>
+          The Word, always within reach
         </div>
         <h1 class="reveal delay-1 font-display text-[2.75rem] font-semibold leading-[1.03] tracking-[-.05em] min-[380px]:text-5xl sm:text-6xl lg:text-[5.25rem]">
-          A brighter way to <span class="bg-gradient-to-r from-lime to-mint bg-clip-text text-transparent">move forward.</span>
+          Carry the Word.<br/><span class="bg-gradient-to-r from-lime to-mint bg-clip-text text-transparent">Walk in its light.</span>
         </h1>
         <p class="reveal delay-2 mt-6 max-w-xl text-base leading-7 text-white/58 sm:mt-7 sm:text-xl sm:leading-8">
-          Veralume brings clarity, focus, and a little more light to every day—all in one beautifully simple app.
+          Read Scripture, reflect with purpose, and grow in faith each day—all in one beautifully peaceful Bible app.
         </p>
 
-        <div id="download" class="reveal delay-3 mt-8 flex flex-col gap-4 sm:mt-10 sm:flex-row sm:items-center">
-          <a id="downloadButton" href="veralume.apk" download class="shine group inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-2xl bg-lime px-7 py-4 font-display font-bold text-ink shadow-[0_14px_45px_rgba(202,255,101,.2)] transition hover:-translate-y-1 hover:shadow-[0_18px_55px_rgba(202,255,101,.3)] active:translate-y-0 sm:w-auto">
+        <div id="download" class="reveal delay-3 mt-8 flex flex-col gap-4 sm:mt-10 sm:flex-row sm:flex-wrap sm:items-center">
+          <a id="downloadButton" href="veralume.apk" download class="shine group inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-2xl bg-lime px-7 py-4 font-display font-bold text-ink shadow-[0_14px_45px_rgba(244,213,141,.2)] transition hover:-translate-y-1 hover:shadow-[0_18px_55px_rgba(244,213,141,.3)] active:translate-y-0 sm:w-auto">
             <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true"><path d="M17.523 15.341a.999.999 0 1 0 0 1.998.999.999 0 0 0 0-1.998Zm-11.046 0a.999.999 0 1 0 0 1.998.999.999 0 0 0 0-1.998ZM17.6 9.29l1.67-2.892a.35.35 0 0 0-.606-.35l-1.69 2.927A10.25 10.25 0 0 0 12 7.7a10.25 10.25 0 0 0-4.974 1.275l-1.69-2.927a.35.35 0 1 0-.606.35L6.4 9.29C3.594 10.81 1.69 13.65 1.5 17h21c-.19-3.35-2.094-6.19-4.9-7.71Z"/></svg>
             Download APK
             <svg viewBox="0 0 24 24" class="h-4 w-4 transition group-hover:translate-y-0.5" fill="none" stroke="currentColor" stroke-width="2.3" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
+          <div class="glass-soft inline-flex min-h-14 w-full cursor-default items-center justify-center gap-3 rounded-2xl px-6 py-4 text-white/75 sm:w-auto" aria-label="Veralume for iOS coming soon">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true"><path d="M16.67 13.47c.02 2.1 1.84 2.8 1.86 2.81-.01.05-.29 1.01-.96 2-.58.86-1.19 1.72-2.14 1.74-.93.02-1.23-.56-2.3-.56s-1.4.54-2.28.58c-.92.03-1.62-.92-2.2-1.78-1.2-1.73-2.11-4.89-.88-7.03a3.43 3.43 0 0 1 2.91-1.77c.9-.02 1.76.61 2.3.61.55 0 1.58-.76 2.66-.65.46.02 1.74.18 2.56 1.39-.07.04-1.53.89-1.53 2.66ZM14.93 8.28c.49-.6.83-1.43.74-2.26-.72.03-1.6.48-2.12 1.08-.47.54-.88 1.39-.77 2.2.81.06 1.64-.41 2.15-1.02Z"/></svg>
+            <span class="text-left leading-tight"><span class="block text-[10px] uppercase tracking-[.14em] text-white/40">Coming soon on</span><span class="font-display text-sm font-semibold text-white/80">iOS</span></span>
+          </div>
           <div class="flex items-center justify-center gap-3 px-2 text-sm text-white/45 sm:justify-start">
             <svg viewBox="0 0 24 24" class="h-4 w-4 text-mint" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 4 4L19 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Android 8.0+ · Secure download
+            Android 8.0+ · Safe &amp; secure
           </div>
         </div>
 
         <div class="reveal delay-3 mt-8 flex flex-wrap justify-center gap-x-3 gap-y-2 text-xs text-white/40 sm:mt-10 sm:justify-start sm:gap-x-7 sm:text-sm">
-          <span>Version 1.0.0</span><span>•</span><span>81 MB</span><span>•</span><span>Free to download</span>
+          <span>Version 1.4.3</span><span>•</span><span>81 MB</span><span>•</span><span>Free Bible app</span>
         </div>
       </div>
 
@@ -132,9 +136,9 @@
         <div class="mobile-float-left glass absolute -left-4 top-20 z-20 rounded-2xl p-4 sm:-left-10">
           <div class="flex items-center gap-3">
             <span class="grid h-10 w-10 place-items-center rounded-xl bg-lime/15 text-lime">
-              <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M3 12h18" stroke-linecap="round"/></svg>
+              <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M7 8h10" stroke-linecap="round"/></svg>
             </span>
-            <div><p class="text-xs text-white/45">Today</p><p class="text-sm font-medium">One step brighter</p></div>
+            <div><p class="text-xs text-white/45">Verse of the day</p><p class="text-sm font-medium">A light for your path</p></div>
           </div>
         </div>
 
@@ -142,31 +146,61 @@
           <div class="phone-screen relative aspect-[9/18.5] overflow-hidden rounded-[2.45rem] border border-white/10 p-6">
             <div class="mx-auto mb-12 h-5 w-24 rounded-full bg-black/70"></div>
             <p class="text-sm text-white/45">Good morning,</p>
-            <h2 class="mt-1 font-display text-3xl font-semibold tracking-tight">Find your<br/><span class="text-lime">daily light.</span></h2>
-            <div class="mt-10 rounded-3xl border border-white/10 bg-white/[.07] p-5 backdrop-blur-xl">
-              <div class="mb-7 flex items-center justify-between"><span class="text-sm text-white/55">Your progress</span><span class="text-xs text-lime">+18%</span></div>
-              <div class="flex h-28 items-end gap-2">
-                <span class="h-[35%] flex-1 rounded-full bg-white/10"></span><span class="h-[50%] flex-1 rounded-full bg-white/10"></span><span class="h-[46%] flex-1 rounded-full bg-white/10"></span><span class="h-[70%] flex-1 rounded-full bg-white/15"></span><span class="h-full flex-1 rounded-full bg-gradient-to-t from-mint to-lime shadow-[0_0_24px_rgba(202,255,101,.25)]"></span><span class="h-[76%] flex-1 rounded-full bg-white/10"></span>
-              </div>
+            <h2 class="mt-1 font-display text-3xl font-semibold tracking-tight">Begin with<br/><span class="text-lime">His Word.</span></h2>
+            <div class="mt-9 rounded-3xl border border-white/10 bg-white/[.07] p-5 backdrop-blur-xl">
+              <div class="mb-5 flex items-center justify-between"><span class="text-xs uppercase tracking-[.16em] text-lime">Psalm 119:105</span><svg viewBox="0 0 24 24" class="h-4 w-4 text-white/40" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.35-7-11a4 4 0 0 1 7-2.65A4 4 0 0 1 19 10c0 6.65-7 11-7 11Z"/></svg></div>
+              <p class="font-display text-lg leading-7 text-white/90">“Your word is a lamp for my feet, a light on my path.”</p>
+              <div class="mt-5 h-px bg-white/10"></div>
+              <p class="mt-4 text-xs text-white/40">Tap to read the full chapter</p>
             </div>
             <div class="mt-4 grid grid-cols-2 gap-3">
-              <div class="rounded-2xl bg-lime p-4 text-ink"><p class="text-xs font-medium opacity-60">Focus</p><p class="mt-5 font-display text-2xl font-bold">84%</p></div>
-              <div class="rounded-2xl border border-white/10 bg-white/[.06] p-4"><p class="text-xs text-white/45">Streak</p><p class="mt-5 font-display text-2xl font-bold">12d</p></div>
+              <div class="rounded-2xl bg-lime p-4 text-ink"><p class="text-xs font-medium opacity-60">Reading plan</p><p class="mt-5 font-display text-2xl font-bold">68%</p></div>
+              <div class="rounded-2xl border border-white/10 bg-white/[.06] p-4"><p class="text-xs text-white/45">Bible streak</p><p class="mt-5 font-display text-2xl font-bold">12d</p></div>
             </div>
           </div>
         </div>
 
         <div class="mobile-float-right glass absolute -right-2 bottom-20 z-20 rounded-2xl px-5 py-4 sm:-right-8">
-          <p class="text-xs text-white/45">Weekly balance</p>
-          <div class="mt-2 flex items-end gap-2"><span class="font-display text-2xl font-bold">92</span><span class="mb-1 text-xs text-mint">Excellent</span></div>
+          <p class="text-xs text-white/45">This week</p>
+          <div class="mt-2 flex items-end gap-2"><span class="font-display text-2xl font-bold">5</span><span class="mb-1 text-xs text-mint">days in the Word</span></div>
         </div>
       </div>
     </section>
   </main>
 
+  <section class="relative z-10 px-5 pb-16 sm:px-6 sm:pb-20 lg:px-10" aria-labelledby="developers-heading">
+    <div class="glass mx-auto max-w-7xl overflow-hidden rounded-[2rem] p-6 sm:p-8 lg:p-10">
+      <div class="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+        <div class="max-w-md">
+          <p class="mb-3 text-xs font-semibold uppercase tracking-[.2em] text-lime">Built with purpose</p>
+          <h2 id="developers-heading" class="font-display text-2xl font-semibold tracking-tight sm:text-3xl">Created by ArkByte Technologies</h2>
+          <p class="mt-3 text-sm leading-6 text-white/45">Thoughtfully designed and developed to make Scripture more accessible every day.</p>
+        </div>
+        <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:min-w-[520px]">
+          <div class="glass-soft flex items-center gap-3 rounded-2xl px-4 py-3.5">
+            <span class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-lime/10 font-display text-xs font-bold text-lime">EG</span>
+            <span class="text-sm font-medium">Earl Gultia</span>
+          </div>
+          <div class="glass-soft flex items-center gap-3 rounded-2xl px-4 py-3.5">
+            <span class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-lime/10 font-display text-xs font-bold text-lime">KQ</span>
+            <span class="text-sm font-medium">Kristelle Joyce Quijano</span>
+          </div>
+          <div class="glass-soft flex items-center gap-3 rounded-2xl px-4 py-3.5">
+            <span class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-lime/10 font-display text-xs font-bold text-lime">MG</span>
+            <span class="text-sm font-medium">Miles Gultia</span>
+          </div>
+          <div class="glass-soft flex items-center gap-3 rounded-2xl px-4 py-3.5">
+            <span class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-lime/10 font-display text-xs font-bold text-lime">AO</span>
+            <span class="text-sm font-medium">Arvey Ociones</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <footer class="relative z-10 border-t border-white/[.07]">
     <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-5 py-7 text-center text-sm text-white/35 sm:flex-row sm:px-6 sm:text-left lg:px-10">
-      <p>© <span id="year"></span> Veralume. Made for brighter days.</p>
+      <p>© <span id="year"></span> ArkByte Technologies. Rooted in the Word.</p>
       <div class="flex gap-6"><a href="#" class="transition hover:text-white">Privacy</a><a href="#" class="transition hover:text-white">Support</a></div>
     </div>
   </footer>
