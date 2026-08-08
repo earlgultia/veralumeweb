@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#07110f" />
+  <meta name="description" content="Download Veralume for Android — your calmer, clearer everyday companion." />
+  <title>Veralume — Download for Android</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['DM Sans', 'sans-serif'],
+            display: ['Manrope', 'sans-serif']
+          },
+          colors: {
+            ink: '#07110f',
+            lime: '#caff65',
+            mint: '#75f4c5'
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+    body {
+      background: #07110f;
+      overflow-x: hidden;
+    }
+    .noise {
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+    }
+    .glass {
+      background: linear-gradient(135deg, rgba(255,255,255,.13), rgba(255,255,255,.045));
+      border: 1px solid rgba(255,255,255,.16);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 24px 70px rgba(0,0,0,.28);
+      backdrop-filter: blur(24px) saturate(145%);
+      -webkit-backdrop-filter: blur(24px) saturate(145%);
+    }
+    .glass-soft {
+      background: rgba(255,255,255,.065);
+      border: 1px solid rgba(255,255,255,.11);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .orb { filter: blur(2px); animation: float 9s ease-in-out infinite; }
+    .orb:nth-child(2) { animation-delay: -3s; }
+    .orb:nth-child(3) { animation-delay: -6s; }
+    .shine { position: relative; overflow: hidden; }
+    .shine::after {
+      content: ''; position: absolute; inset: -100% auto -100% -40%; width: 30%;
+      transform: rotate(20deg); background: rgba(255,255,255,.28); filter: blur(8px);
+      transition: left .7s ease;
+    }
+    .shine:hover::after { left: 120%; }
+    .phone-screen {
+      background: radial-gradient(circle at 75% 15%, rgba(202,255,101,.23), transparent 30%),
+                  linear-gradient(150deg, #152923 0%, #091310 65%);
+    }
+    @keyframes float { 0%,100% { transform: translate3d(0,0,0); } 50% { transform: translate3d(0,-18px,0); } }
+    @keyframes rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+    .reveal { opacity: 0; animation: rise .8s cubic-bezier(.2,.8,.2,1) forwards; }
+    .delay-1 { animation-delay: .12s; } .delay-2 { animation-delay: .24s; } .delay-3 { animation-delay: .36s; }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body class="min-h-screen font-sans text-white selection:bg-lime selection:text-ink">
+  <div class="pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden="true">
+    <div class="orb absolute -left-32 top-20 h-80 w-80 rounded-full bg-emerald-400/20 blur-3xl"></div>
+    <div class="orb absolute right-[-8rem] top-[-4rem] h-[28rem] w-[28rem] rounded-full bg-lime/20 blur-3xl"></div>
+    <div class="orb absolute bottom-[-10rem] left-1/2 h-96 w-96 rounded-full bg-cyan-400/10 blur-3xl"></div>
+    <div class="noise absolute inset-0 opacity-[.045]"></div>
+  </div>
+
+  <header class="relative z-20 mx-auto flex max-w-7xl items-center justify-between px-6 py-6 lg:px-10">
+    <a href="#" class="flex items-center gap-3" aria-label="Veralume home">
+      <span class="grid h-10 w-10 place-items-center rounded-2xl bg-lime text-ink shadow-[0_0_30px_rgba(202,255,101,.22)]">
+        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.3" aria-hidden="true"><path d="M5 4l7 16 7-16-7 5-7-5Z" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="font-display text-lg font-bold tracking-tight">veralume</span>
+    </a>
+    <a href="#download" class="glass-soft rounded-full px-5 py-2.5 text-sm font-medium text-white/90 transition hover:bg-white/10 hover:text-white">Get the app</a>
+  </header>
+
+  <main class="relative z-10">
+    <section class="mx-auto grid min-h-[calc(100vh-96px)] max-w-7xl items-center gap-14 px-6 pb-20 pt-8 lg:grid-cols-[1.05fr_.95fr] lg:px-10 lg:py-12">
+      <div class="max-w-2xl">
+        <div class="reveal mb-7 inline-flex items-center gap-2 rounded-full border border-lime/20 bg-lime/[.07] px-4 py-2 text-sm text-lime">
+          <span class="h-2 w-2 rounded-full bg-lime shadow-[0_0_12px_#caff65]"></span>
+          Now available on Android
+        </div>
+        <h1 class="reveal delay-1 font-display text-5xl font-semibold leading-[1.02] tracking-[-.05em] sm:text-6xl lg:text-[5.25rem]">
+          A brighter way to <span class="bg-gradient-to-r from-lime to-mint bg-clip-text text-transparent">move forward.</span>
+        </h1>
+        <p class="reveal delay-2 mt-7 max-w-xl text-lg leading-8 text-white/58 sm:text-xl">
+          Veralume brings clarity, focus, and a little more light to every day—all in one beautifully simple app.
+        </p>
+
+        <div id="download" class="reveal delay-3 mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
+          <a id="downloadButton" href="veralume.apk" download class="shine group inline-flex items-center justify-center gap-3 rounded-2xl bg-lime px-7 py-4 font-display font-bold text-ink shadow-[0_14px_45px_rgba(202,255,101,.2)] transition hover:-translate-y-1 hover:shadow-[0_18px_55px_rgba(202,255,101,.3)] active:translate-y-0">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true"><path d="M17.523 15.341a.999.999 0 1 0 0 1.998.999.999 0 0 0 0-1.998Zm-11.046 0a.999.999 0 1 0 0 1.998.999.999 0 0 0 0-1.998ZM17.6 9.29l1.67-2.892a.35.35 0 0 0-.606-.35l-1.69 2.927A10.25 10.25 0 0 0 12 7.7a10.25 10.25 0 0 0-4.974 1.275l-1.69-2.927a.35.35 0 1 0-.606.35L6.4 9.29C3.594 10.81 1.69 13.65 1.5 17h21c-.19-3.35-2.094-6.19-4.9-7.71Z"/></svg>
+            Download APK
+            <svg viewBox="0 0 24 24" class="h-4 w-4 transition group-hover:translate-y-0.5" fill="none" stroke="currentColor" stroke-width="2.3" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <div class="flex items-center gap-3 px-2 text-sm text-white/45">
+            <svg viewBox="0 0 24 24" class="h-4 w-4 text-mint" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 4 4L19 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Android 8.0+ · Secure download
+          </div>
+        </div>
+
+        <div class="reveal delay-3 mt-10 flex flex-wrap gap-x-7 gap-y-3 text-sm text-white/40">
+          <span>Version 1.0.0</span><span>•</span><span>81 MB</span><span>•</span><span>Free to download</span>
+        </div>
+      </div>
+
+      <div class="reveal delay-2 relative mx-auto w-full max-w-[520px] lg:justify-self-end">
+        <div class="glass absolute -left-4 top-20 z-20 rounded-2xl p-4 sm:-left-10">
+          <div class="flex items-center gap-3">
+            <span class="grid h-10 w-10 place-items-center rounded-xl bg-lime/15 text-lime">
+              <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M3 12h18" stroke-linecap="round"/></svg>
+            </span>
+            <div><p class="text-xs text-white/45">Today</p><p class="text-sm font-medium">One step brighter</p></div>
+          </div>
+        </div>
+
+        <div class="glass relative mx-auto w-[280px] rounded-[3rem] p-2.5 sm:w-[310px]">
+          <div class="phone-screen relative aspect-[9/18.5] overflow-hidden rounded-[2.45rem] border border-white/10 p-6">
+            <div class="mx-auto mb-12 h-5 w-24 rounded-full bg-black/70"></div>
+            <p class="text-sm text-white/45">Good morning,</p>
+            <h2 class="mt-1 font-display text-3xl font-semibold tracking-tight">Find your<br/><span class="text-lime">daily light.</span></h2>
+            <div class="mt-10 rounded-3xl border border-white/10 bg-white/[.07] p-5 backdrop-blur-xl">
+              <div class="mb-7 flex items-center justify-between"><span class="text-sm text-white/55">Your progress</span><span class="text-xs text-lime">+18%</span></div>
+              <div class="flex h-28 items-end gap-2">
+                <span class="h-[35%] flex-1 rounded-full bg-white/10"></span><span class="h-[50%] flex-1 rounded-full bg-white/10"></span><span class="h-[46%] flex-1 rounded-full bg-white/10"></span><span class="h-[70%] flex-1 rounded-full bg-white/15"></span><span class="h-full flex-1 rounded-full bg-gradient-to-t from-mint to-lime shadow-[0_0_24px_rgba(202,255,101,.25)]"></span><span class="h-[76%] flex-1 rounded-full bg-white/10"></span>
+              </div>
+            </div>
+            <div class="mt-4 grid grid-cols-2 gap-3">
+              <div class="rounded-2xl bg-lime p-4 text-ink"><p class="text-xs font-medium opacity-60">Focus</p><p class="mt-5 font-display text-2xl font-bold">84%</p></div>
+              <div class="rounded-2xl border border-white/10 bg-white/[.06] p-4"><p class="text-xs text-white/45">Streak</p><p class="mt-5 font-display text-2xl font-bold">12d</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass absolute -right-2 bottom-20 z-20 rounded-2xl px-5 py-4 sm:-right-8">
+          <p class="text-xs text-white/45">Weekly balance</p>
+          <div class="mt-2 flex items-end gap-2"><span class="font-display text-2xl font-bold">92</span><span class="mb-1 text-xs text-mint">Excellent</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="relative z-10 border-t border-white/[.07]">
+    <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 py-7 text-sm text-white/35 sm:flex-row lg:px-10">
+      <p>© <span id="year"></span> Veralume. Made for brighter days.</p>
+      <div class="flex gap-6"><a href="#" class="transition hover:text-white">Privacy</a><a href="#" class="transition hover:text-white">Support</a></div>
+    </div>
+  </footer>
+
+  <div id="toast" class="glass fixed bottom-6 left-1/2 z-50 flex -translate-x-1/2 translate-y-20 items-center gap-3 rounded-2xl px-5 py-3 text-sm opacity-0 transition duration-500" role="status" aria-live="polite">
+    <span class="grid h-7 w-7 place-items-center rounded-full bg-lime text-ink">✓</span>
+    Your download is starting…
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const button = document.getElementById('downloadButton');
+    const toast = document.getElementById('toast');
+    button.addEventListener('click', () => {
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      window.setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 3200);
+    });
+  </script>
+</body>
+</html>
