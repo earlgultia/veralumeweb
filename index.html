@@ -112,7 +112,7 @@
         </p>
 
         <div id="download" class="reveal delay-3 mt-8 flex flex-col gap-4 sm:mt-10 sm:flex-row sm:flex-wrap sm:items-center">
-          <a id="downloadButton" href="veralume.apk" download class="shine group inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-2xl bg-lime px-7 py-4 font-display font-bold text-ink shadow-[0_14px_45px_rgba(244,213,141,.2)] transition hover:-translate-y-1 hover:shadow-[0_18px_55px_rgba(244,213,141,.3)] active:translate-y-0 sm:w-auto">
+          <a id="downloadButton" href="./veralume.apk" target="_blank" rel="noopener noreferrer" download="veralume.apk" class="shine group inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-2xl bg-lime px-7 py-4 font-display font-bold text-ink shadow-[0_14px_45px_rgba(244,213,141,.2)] transition hover:-translate-y-1 hover:shadow-[0_18px_55px_rgba(244,213,141,.3)] active:translate-y-0 sm:w-auto">
             <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true"><path d="M17.523 15.341a.999.999 0 1 0 0 1.998.999.999 0 0 0 0-1.998Zm-11.046 0a.999.999 0 1 0 0 1.998.999.999 0 0 0 0-1.998ZM17.6 9.29l1.67-2.892a.35.35 0 0 0-.606-.35l-1.69 2.927A10.25 10.25 0 0 0 12 7.7a10.25 10.25 0 0 0-4.974 1.275l-1.69-2.927a.35.35 0 1 0-.606.35L6.4 9.29C3.594 10.81 1.69 13.65 1.5 17h21c-.19-3.35-2.094-6.19-4.9-7.71Z"/></svg>
             Download APK
             <svg viewBox="0 0 24 24" class="h-4 w-4 transition group-hover:translate-y-0.5" fill="none" stroke="currentColor" stroke-width="2.3" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -253,9 +253,20 @@
     document.getElementById('year').textContent = new Date().getFullYear();
     const button = document.getElementById('downloadButton');
     const toast = document.getElementById('toast');
-    button.addEventListener('click', () => {
+
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
+
+      const apkUrl = button.getAttribute('href');
+      const downloadWindow = window.open(apkUrl, '_blank', 'noopener,noreferrer');
+
+      if (!downloadWindow) {
+        window.location.href = apkUrl;
+      }
+
       toast.classList.remove('translate-y-20', 'opacity-0');
       toast.classList.add('translate-y-0', 'opacity-100');
+
       window.setTimeout(() => {
         toast.classList.add('translate-y-20', 'opacity-0');
         toast.classList.remove('translate-y-0', 'opacity-100');
