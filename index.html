@@ -78,6 +78,7 @@
       .mobile-float-left, .mobile-float-right { display: none; }
     }
     @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+    body.modal-open { overflow: hidden; }
   </style>
 </head>
 <body class="min-h-screen font-sans text-white selection:bg-lime selection:text-ink">
@@ -120,10 +121,14 @@
           </button>
 
           <div class="glass-soft inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-2xl px-4 py-3 text-white/75 sm:w-auto" aria-label="Install Veralume by scanning the QR code">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=96x96&data=https%3A%2F%2Fearlgultia.github.io%2Fveralumeweb%2Fveralume.apk" alt="QR code to install Veralume APK" class="h-16 w-16 rounded-xl bg-white p-1.5 shadow-sm" />
+            <button id="qrButton" type="button" class="group relative rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-lime focus-visible:ring-offset-2 focus-visible:ring-offset-ink" aria-haspopup="dialog" aria-controls="qrDialog" aria-label="Enlarge QR code to install Veralume APK">
+              <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https%3A%2F%2Fearlgultia.github.io%2Fveralumeweb%2Fveralume.apk" alt="QR code to install Veralume APK" class="h-16 w-16 rounded-xl bg-white p-1.5 shadow-sm transition duration-200 group-hover:scale-105" />
+              <span class="absolute inset-0 grid place-items-center rounded-xl bg-ink/55 text-[9px] font-semibold uppercase tracking-wide text-white opacity-0 transition group-hover:opacity-100 group-focus-visible:opacity-100">Enlarge</span>
+            </button>
             <div class="text-left leading-tight">
               <span class="block text-[10px] uppercase tracking-[.14em] text-white/40">Scan to install</span>
               <span class="font-display text-sm font-semibold text-white/80">Fast Android install</span>
+              <span class="mt-1 block text-[10px] text-white/40">Tap QR to enlarge</span>
             </div>
           </div>
 
@@ -380,6 +385,20 @@
     Your download is starting…
   </div>
 
+  <div id="qrDialog" class="fixed inset-0 z-50 hidden items-center justify-center bg-ink/80 p-5 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="qrDialogTitle" aria-hidden="true">
+    <div class="glass relative w-full max-w-md rounded-3xl p-6 text-center shadow-2xl sm:p-8">
+      <button id="qrCloseButton" type="button" class="absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-full text-white/65 transition hover:bg-white/10 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-lime" aria-label="Close enlarged QR code">
+        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" stroke-linecap="round"/></svg>
+      </button>
+      <p class="text-xs font-semibold uppercase tracking-[.18em] text-lime">Scan to install</p>
+      <h2 id="qrDialogTitle" class="mt-2 font-display text-2xl font-bold">Veralume for Android</h2>
+      <button id="qrImageCloseButton" type="button" class="mx-auto mt-6 block w-full max-w-[320px] rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-lime focus-visible:ring-offset-2 focus-visible:ring-offset-ink" aria-label="Minimize QR code">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=512x512&data=https%3A%2F%2Fearlgultia.github.io%2Fveralumeweb%2Fveralume.apk" alt="Large QR code to install Veralume APK" class="w-full rounded-2xl bg-white p-3 shadow-lg" />
+      </button>
+      <p class="mt-5 text-sm text-white/55">Point your phone camera at this code to download the APK. Tap it again to minimize.</p>
+    </div>
+  </div>
+
   <script>
     // Set year in footer
     document.getElementById('year').textContent = new Date().getFullYear();
@@ -387,6 +406,10 @@
     const downloadCounter = document.getElementById('downloadCounter');
     const downloadButton = document.getElementById('downloadButton');
     const toast = document.getElementById('toast');
+    const qrButton = document.getElementById('qrButton');
+    const qrDialog = document.getElementById('qrDialog');
+    const qrCloseButton = document.getElementById('qrCloseButton');
+    const qrImageCloseButton = document.getElementById('qrImageCloseButton');
     // Resolve paths from this page so the site also works when hosted in a
     // subdirectory (for example, GitHub Pages at /veralumeweb/).
     const appUrl = (file) => new URL(file, document.baseURI).href;
@@ -445,6 +468,31 @@
         toast.classList.remove('translate-y-0', 'opacity-100');
       }, 2200);
     }
+
+    function closeQrDialog() {
+      qrDialog.classList.add('hidden');
+      qrDialog.classList.remove('flex');
+      qrDialog.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('modal-open');
+      qrButton.focus();
+    }
+
+    qrButton.addEventListener('click', () => {
+      qrDialog.classList.remove('hidden');
+      qrDialog.classList.add('flex');
+      qrDialog.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('modal-open');
+      qrCloseButton.focus();
+    });
+
+    qrCloseButton.addEventListener('click', closeQrDialog);
+    qrImageCloseButton.addEventListener('click', closeQrDialog);
+    qrDialog.addEventListener('click', (event) => {
+      if (event.target === qrDialog) closeQrDialog();
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !qrDialog.classList.contains('hidden')) closeQrDialog();
+    });
 
     fetchDownloadCount();
     supabaseClient
