@@ -371,11 +371,13 @@
       event.preventDefault();
 
       const apkUrl = button.getAttribute('href');
-      const downloadWindow = window.open(apkUrl, '_blank', 'noopener,noreferrer');
-
-      if (!downloadWindow) {
-        window.location.href = apkUrl;
-      }
+      const link = document.createElement('a');
+      link.href = apkUrl;
+      link.download = 'veralume.apk';
+      link.rel = 'noopener noreferrer';
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
 
       toast.classList.remove('translate-y-20', 'opacity-0');
       toast.classList.add('translate-y-0', 'opacity-100');
