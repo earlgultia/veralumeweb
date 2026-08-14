@@ -112,11 +112,20 @@
         </p>
 
         <div id="download" class="reveal delay-3 mt-8 flex flex-col gap-4 sm:mt-10 sm:flex-row sm:flex-wrap sm:items-center">
-          <a id="downloadButton" href="./veralume.apk" target="_blank" rel="noopener noreferrer" download="veralume.apk" class="shine group inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-2xl bg-lime px-7 py-4 font-display font-bold text-ink shadow-[0_14px_45px_rgba(244,213,141,.2)] transition hover:-translate-y-1 hover:shadow-[0_18px_55px_rgba(244,213,141,.3)] active:translate-y-0 sm:w-auto">
+          <a id="downloadButton" href="https://earlgultia.github.io/veralumeweb/veralume.apk" rel="noopener noreferrer" download="veralume.apk" class="shine group inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-2xl bg-lime px-7 py-4 font-display font-bold text-ink shadow-[0_14px_45px_rgba(244,213,141,.2)] transition hover:-translate-y-1 hover:shadow-[0_18px_55px_rgba(244,213,141,.3)] active:translate-y-0 sm:w-auto">
             <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true"><path d="M17.523 15.341a.999.999 0 1 0 0 1.998.999.999 0 0 0 0-1.998Zm-11.046 0a.999.999 0 1 0 0 1.998.999.999 0 0 0 0-1.998ZM17.6 9.29l1.67-2.892a.35.35 0 0 0-.606-.35l-1.69 2.927A10.25 10.25 0 0 0 12 7.7a10.25 10.25 0 0 0-4.974 1.275l-1.69-2.927a.35.35 0 1 0-.606.35L6.4 9.29C3.594 10.81 1.69 13.65 1.5 17h21c-.19-3.35-2.094-6.19-4.9-7.71Z"/></svg>
             Download APK
             <svg viewBox="0 0 24 24" class="h-4 w-4 transition group-hover:translate-y-0.5" fill="none" stroke="currentColor" stroke-width="2.3" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
+
+          <div class="glass-soft inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-2xl px-4 py-3 text-white/75 sm:w-auto" aria-label="Install Veralume by scanning the QR code">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=96x96&data=https%3A%2F%2Fearlgultia.github.io%2Fveralumeweb%2Fveralume.apk" alt="QR code to install Veralume APK" class="h-16 w-16 rounded-xl bg-white p-1.5 shadow-sm" />
+            <div class="text-left leading-tight">
+              <span class="block text-[10px] uppercase tracking-[.14em] text-white/40">Scan to install</span>
+              <span class="font-display text-sm font-semibold text-white/80">Fast Android install</span>
+            </div>
+          </div>
+
           <div class="glass-soft inline-flex min-h-14 w-full cursor-default items-center justify-center gap-3 rounded-2xl px-6 py-4 text-white/75 sm:w-auto" aria-label="Veralume for iOS coming soon">
             <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true"><path d="M16.67 13.47c.02 2.1 1.84 2.8 1.86 2.81-.01.05-.29 1.01-.96 2-.58.86-1.19 1.72-2.14 1.74-.93.02-1.23-.56-2.3-.56s-1.4.54-2.28.58c-.92.03-1.62-.92-2.2-1.78-1.2-1.73-2.11-4.89-.88-7.03a3.43 3.43 0 0 1 2.91-1.77c.9-.02 1.76.61 2.3.61.55 0 1.58-.76 2.66-.65.46.02 1.74.18 2.56 1.39-.07.04-1.53.89-1.53 2.66ZM14.93 8.28c.49-.6.83-1.43.74-2.26-.72.03-1.6.48-2.12 1.08-.47.54-.88 1.39-.77 2.2.81.06 1.64-.41 2.15-1.02Z"/></svg>
             <span class="text-left leading-tight"><span class="block text-[10px] uppercase tracking-[.14em] text-white/40">Coming soon on</span><span class="font-display text-sm font-semibold text-white/80">iOS</span></span>
@@ -367,39 +376,14 @@
     const button = document.getElementById('downloadButton');
     const toast = document.getElementById('toast');
 
-    const getApkUrl = () => {
-      const currentUrl = new URL(window.location.href);
-
-      if (currentUrl.hostname === 'localhost' || currentUrl.hostname === '127.0.0.1') {
-        return 'http://localhost:8000/veralume.apk';
-      }
-
-      return new URL('./veralume.apk', currentUrl.origin + currentUrl.pathname).toString();
-    };
-
-    button.href = getApkUrl();
-    button.setAttribute('download', 'veralume.apk');
-
-    button.addEventListener('click', (event) => {
-      event.preventDefault();
-
-      const apkUrl = getApkUrl();
-      const link = document.createElement('a');
-      link.href = apkUrl;
-      link.download = 'veralume.apk';
-      link.target = '_blank';
-      link.rel = 'noopener noreferrer';
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-
+    button.addEventListener('click', () => {
       toast.classList.remove('translate-y-20', 'opacity-0');
       toast.classList.add('translate-y-0', 'opacity-100');
 
       window.setTimeout(() => {
         toast.classList.add('translate-y-20', 'opacity-0');
         toast.classList.remove('translate-y-0', 'opacity-100');
-      }, 3200);
+      }, 2200);
     });
   </script>
 </body>
