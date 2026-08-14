@@ -145,9 +145,32 @@ app.get('/api/stats', (req, res) => {
   });
 });
 
+// Serve APK file with proper headers
+app.get('/veralume.apk', (req, res) => {
+  const filePath = path.join(__dirname, 'veralume.apk');
+  res.download(filePath, 'veralume.apk', (err) => {
+    if (err) {
+      console.error('Error downloading file:', err);
+      res.status(404).json({ error: 'APK file not found' });
+    }
+  });
+});
+
 // Serve static files
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// Catch-all for other static files
+app.use((req, res) => {
+  const filePath = path.join(__dirname, req.path);
+  // Prevent directory traversal
+  if (!filePath.startsWith(__dirname)) {
+    return res.status(403).json({ error: 'Access denied' });
+  }
+  
+  // Try to serve as static file
+  res.status(404).json({ error: 'Not found' });
 });
 
 const PORT = process.env.PORT || 3000;

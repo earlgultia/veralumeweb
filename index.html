@@ -388,6 +388,9 @@
     const downloadCounter = document.getElementById('downloadCounter');
     const downloadButton = document.getElementById('downloadButton');
     const toast = document.getElementById('toast');
+    // Resolve paths from this page so the site also works when hosted in a
+    // subdirectory (for example, GitHub Pages at /veralumeweb/).
+    const appUrl = (file) => new URL(file, document.baseURI).href;
 
     function connectWebSocket() {
       const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
@@ -425,7 +428,7 @@
     }
 
     function fetchDownloadCount() {
-      fetch('/api/downloads')
+      fetch(appUrl('api/downloads'))
         .then(response => response.json())
         .then(data => updateCounter(data.downloads))
         .catch(error => console.error('Error fetching download count:', error));
@@ -436,26 +439,22 @@
     }
 
     // Handle download button click
-    downloadButton.addEventListener('click', async (e) => {
+    downloadButton.addEventListener('click', (e) => {
       e.preventDefault();
-      
-      try {
-        // Record the download
-        await fetch('/api/download', { method: 'POST' });
-        
-        // Start download
-        const link = document.createElement('a');
-        link.href = '/veralume.apk';
-        link.download = 'veralume.apk';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        
-        // Show success toast
-        showToast();
-      } catch (error) {
-        console.error('Download error:', error);
-      }
+
+      // Start the APK immediately. Download tracking is optional, so a site
+      // without the Node API (such as GitHub Pages) must not block it.
+      const link = document.createElement('a');
+      link.href = appUrl('veralume.apk');
+      link.download = 'veralume.apk';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      fetch(appUrl('api/download'), { method: 'POST' })
+        .catch(error => console.info('Download tracking unavailable:', error));
+
+      showToast();
     });
 
     function showToast() {
