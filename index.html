@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -383,55 +384,30 @@
     // Set year in footer
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // WebSocket setup for real-time counter
-    let ws;
     const downloadCounter = document.getElementById('downloadCounter');
     const downloadButton = document.getElementById('downloadButton');
     const toast = document.getElementById('toast');
     // Resolve paths from this page so the site also works when hosted in a
     // subdirectory (for example, GitHub Pages at /veralumeweb/).
     const appUrl = (file) => new URL(file, document.baseURI).href;
+    const supabaseClient = window.supabase.createClient(
+      'https://oapwrspnhtizqyejqtuq.supabase.co',
+      'sb_publishable_OQn9_C1w4jJ5pMrmn5RCqQ_DwelrGiV'
+    );
 
-    function connectWebSocket() {
-      const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-      const wsUrl = `${protocol}//${window.location.host}`;
-      
-      ws = new WebSocket(wsUrl);
-      
-      ws.onopen = () => {
-        console.log('WebSocket connected');
-        // Fetch initial count
-        fetchDownloadCount();
-      };
+    async function fetchDownloadCount() {
+      const { data, error } = await supabaseClient
+        .from('download_counter')
+        .select('total_downloads')
+        .eq('id', 1)
+        .single();
 
-      ws.onmessage = (event) => {
-        try {
-          const data = JSON.parse(event.data);
-          if (data.type === 'download_count') {
-            updateCounter(data.count);
-          }
-        } catch (e) {
-          console.error('Error parsing WebSocket message:', e);
-        }
-      };
+      if (error) {
+        console.error('Error fetching download count:', error.message);
+        return;
+      }
 
-      ws.onerror = (error) => {
-        console.error('WebSocket error:', error);
-        // Fallback to polling if WebSocket fails
-        setTimeout(fetchDownloadCount, 2000);
-      };
-
-      ws.onclose = () => {
-        console.log('WebSocket disconnected, reconnecting...');
-        setTimeout(connectWebSocket, 3000);
-      };
-    }
-
-    function fetchDownloadCount() {
-      fetch(appUrl('api/downloads'))
-        .then(response => response.json())
-        .then(data => updateCounter(data.downloads))
-        .catch(error => console.error('Error fetching download count:', error));
+      updateCounter(data.total_downloads);
     }
 
     function updateCounter(count) {
@@ -451,8 +427,11 @@
       link.click();
       document.body.removeChild(link);
 
-      fetch(appUrl('api/download'), { method: 'POST' })
-        .catch(error => console.info('Download tracking unavailable:', error));
+      supabaseClient
+        .rpc('record_download')
+        .then(({ error }) => {
+          if (error) console.info('Download tracking unavailable:', error.message);
+        });
 
       showToast();
     });
@@ -467,14 +446,16 @@
       }, 2200);
     }
 
-    // Initialize WebSocket connection
-    if (window.location.protocol !== 'file:') {
-      connectWebSocket();
-    } else {
-      // Fallback for local file:// protocol
-      fetchDownloadCount();
-      setInterval(fetchDownloadCount, 2000);
-    }
+    fetchDownloadCount();
+    supabaseClient
+      .channel('download-counter')
+      .on('postgres_changes', {
+        event: 'UPDATE',
+        schema: 'public',
+        table: 'download_counter',
+        filter: 'id=eq.1'
+      }, ({ new: row }) => updateCounter(row.total_downloads))
+      .subscribe();
   </script>
 </body>
 </html>
