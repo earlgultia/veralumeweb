@@ -112,11 +112,11 @@
         </p>
 
         <div id="download" class="reveal delay-3 mt-8 flex flex-col gap-4 sm:mt-10 sm:flex-row sm:flex-wrap sm:items-center">
-          <a id="downloadButton" href="https://earlgultia.github.io/veralumeweb/veralume.apk" rel="noopener noreferrer" download="veralume.apk" class="shine group inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-2xl bg-lime px-7 py-4 font-display font-bold text-ink shadow-[0_14px_45px_rgba(244,213,141,.2)] transition hover:-translate-y-1 hover:shadow-[0_18px_55px_rgba(244,213,141,.3)] active:translate-y-0 sm:w-auto">
+          <button id="downloadButton" class="shine group inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-2xl bg-lime px-7 py-4 font-display font-bold text-ink shadow-[0_14px_45px_rgba(244,213,141,.2)] transition hover:-translate-y-1 hover:shadow-[0_18px_55px_rgba(244,213,141,.3)] active:translate-y-0 sm:w-auto cursor-pointer">
             <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true"><path d="M17.523 15.341a.999.999 0 1 0 0 1.998.999.999 0 0 0 0-1.998Zm-11.046 0a.999.999 0 1 0 0 1.998.999.999 0 0 0 0-1.998ZM17.6 9.29l1.67-2.892a.35.35 0 0 0-.606-.35l-1.69 2.927A10.25 10.25 0 0 0 12 7.7a10.25 10.25 0 0 0-4.974 1.275l-1.69-2.927a.35.35 0 1 0-.606.35L6.4 9.29C3.594 10.81 1.69 13.65 1.5 17h21c-.19-3.35-2.094-6.19-4.9-7.71Z"/></svg>
             Download APK
             <svg viewBox="0 0 24 24" class="h-4 w-4 transition group-hover:translate-y-0.5" fill="none" stroke="currentColor" stroke-width="2.3" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
+          </button>
 
           <div class="glass-soft inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-2xl px-4 py-3 text-white/75 sm:w-auto" aria-label="Install Veralume by scanning the QR code">
             <img src="https://api.qrserver.com/v1/create-qr-code/?size=96x96&data=https%3A%2F%2Fearlgultia.github.io%2Fveralumeweb%2Fveralume.apk" alt="QR code to install Veralume APK" class="h-16 w-16 rounded-xl bg-white p-1.5 shadow-sm" />
@@ -133,6 +133,14 @@
           <div class="flex items-center justify-center gap-3 px-2 text-sm text-white/45 sm:justify-start">
             <svg viewBox="0 0 24 24" class="h-4 w-4 text-mint" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 4 4L19 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             Android 8.0+ · Safe &amp; secure
+          </div>
+
+          <div class="glass-soft inline-flex min-h-12 items-center gap-3 rounded-2xl px-4 py-3 sm:min-w-max">
+            <div class="flex items-center gap-2">
+              <svg viewBox="0 0 24 24" class="h-5 w-5 text-lime animate-pulse" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+              <span class="text-xs font-medium uppercase tracking-[.1em] text-white/60">Live downloads</span>
+            </div>
+            <span id="downloadCounter" class="font-display text-lg font-bold text-lime">0</span>
           </div>
         </div>
 
@@ -372,19 +380,102 @@
   </div>
 
   <script>
+    // Set year in footer
     document.getElementById('year').textContent = new Date().getFullYear();
-    const button = document.getElementById('downloadButton');
+
+    // WebSocket setup for real-time counter
+    let ws;
+    const downloadCounter = document.getElementById('downloadCounter');
+    const downloadButton = document.getElementById('downloadButton');
     const toast = document.getElementById('toast');
 
-    button.addEventListener('click', () => {
+    function connectWebSocket() {
+      const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+      const wsUrl = `${protocol}//${window.location.host}`;
+      
+      ws = new WebSocket(wsUrl);
+      
+      ws.onopen = () => {
+        console.log('WebSocket connected');
+        // Fetch initial count
+        fetchDownloadCount();
+      };
+
+      ws.onmessage = (event) => {
+        try {
+          const data = JSON.parse(event.data);
+          if (data.type === 'download_count') {
+            updateCounter(data.count);
+          }
+        } catch (e) {
+          console.error('Error parsing WebSocket message:', e);
+        }
+      };
+
+      ws.onerror = (error) => {
+        console.error('WebSocket error:', error);
+        // Fallback to polling if WebSocket fails
+        setTimeout(fetchDownloadCount, 2000);
+      };
+
+      ws.onclose = () => {
+        console.log('WebSocket disconnected, reconnecting...');
+        setTimeout(connectWebSocket, 3000);
+      };
+    }
+
+    function fetchDownloadCount() {
+      fetch('/api/downloads')
+        .then(response => response.json())
+        .then(data => updateCounter(data.downloads))
+        .catch(error => console.error('Error fetching download count:', error));
+    }
+
+    function updateCounter(count) {
+      downloadCounter.textContent = count.toLocaleString();
+    }
+
+    // Handle download button click
+    downloadButton.addEventListener('click', async (e) => {
+      e.preventDefault();
+      
+      try {
+        // Record the download
+        await fetch('/api/download', { method: 'POST' });
+        
+        // Start download
+        const link = document.createElement('a');
+        link.href = '/veralume.apk';
+        link.download = 'veralume.apk';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        // Show success toast
+        showToast();
+      } catch (error) {
+        console.error('Download error:', error);
+      }
+    });
+
+    function showToast() {
       toast.classList.remove('translate-y-20', 'opacity-0');
       toast.classList.add('translate-y-0', 'opacity-100');
 
-      window.setTimeout(() => {
+      setTimeout(() => {
         toast.classList.add('translate-y-20', 'opacity-0');
         toast.classList.remove('translate-y-0', 'opacity-100');
       }, 2200);
-    });
+    }
+
+    // Initialize WebSocket connection
+    if (window.location.protocol !== 'file:') {
+      connectWebSocket();
+    } else {
+      // Fallback for local file:// protocol
+      fetchDownloadCount();
+      setInterval(fetchDownloadCount, 2000);
+    }
   </script>
 </body>
 </html>

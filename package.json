@@ -1,0 +1,19 @@
+{
+  "name": "veralume-web",
+  "version": "1.5.0",
+  "description": "Veralume website with real-time download counter",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["veralume", "bible", "app"],
+  "author": "ArkByte Technologies",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "ws": "^8.14.2",
+    "cors": "^2.8.5",
+    "sqlite3": "^5.1.6"
+  }
+}
